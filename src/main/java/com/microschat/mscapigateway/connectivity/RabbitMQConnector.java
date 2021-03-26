@@ -28,6 +28,5 @@ public class RabbitMQConnector {
     public void sendRegistrationRequest(UserInformationMessage userInformationMessage){
         log.info("Sending registration request to queues with routing key {}", ConnectivityConstant.REGISTRATION_USER_ROUTING_KEY);
         rabbitTemplate.convertAndSend(ConnectivityConstant.APPLICATION_EXCHANGE, ConnectivityConstant.REGISTRATION_USER_ROUTING_KEY, userInformationMessage);
-
     }
 }
