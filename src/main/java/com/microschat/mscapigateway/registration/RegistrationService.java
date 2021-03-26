@@ -1,4 +1,4 @@
-package com.microschat.mscapigateway.connectivity;
+package com.microschat.mscapigateway.registration;
 
 import com.microschat.commonlibrary.UserInformationMessage;
 import com.microschat.commonlibrary.connectivity.ConnectivityConstant;
@@ -12,21 +12,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 @Slf4j
-public class RabbitMQConnector {
+public class RegistrationService {
 
     private final RabbitTemplate rabbitTemplate;
 
-    public RabbitMQConnector(RabbitTemplate rabbitTemplate) {
+    public RegistrationService(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    @Bean
-    public TopicExchange getTopicExchange(){
-        return new TopicExchange(ConnectivityConstant.APPLICATION_EXCHANGE);
-    }
 
     public void sendRegistrationRequest(UserInformationMessage userInformationMessage){
-        log.info("Sending registration request to queues with routing key {}", ConnectivityConstant.REGISTRATION_USER_ROUTING_KEY);
-        rabbitTemplate.convertAndSend(ConnectivityConstant.APPLICATION_EXCHANGE, ConnectivityConstant.REGISTRATION_USER_ROUTING_KEY, userInformationMessage);
+        log.info("Sending registration request to queues with routing key {}", ConnectivityConstant.USER_REGISTRATION_ROUTING_KEY);
+        rabbitTemplate.convertAndSend(ConnectivityConstant.APPLICATION_EXCHANGE, ConnectivityConstant.USER_REGISTRATION_ROUTING_KEY, userInformationMessage);
     }
 }
