@@ -20,4 +20,9 @@ public class AuthenticationController {
     public String authenticateUser(@RequestBody UserInformationMessage userInformationMessage){
         return authenticationService.authenticateUser(userInformationMessage);
     }
+
+    @PostMapping("/validate")
+    public boolean validateToken(@RequestBody String token){
+        return authenticationService.validateToken(token);
+    }
 }

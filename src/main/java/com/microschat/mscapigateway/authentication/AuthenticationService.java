@@ -3,6 +3,7 @@ package com.microschat.mscapigateway.authentication;
 import com.microschat.commonlibrary.UserInformationMessage;
 import com.microschat.commonlibrary.connectivity.ConnectivityConstant;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.AmqpRejectAndDontRequeueException;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
@@ -27,6 +28,17 @@ public class AuthenticationService {
                 userInformationMessage);
         log.info("Got token {} from auth service", token);
         return token;
+    }
+
+    public boolean validateToken(String token) {
+        Boolean valid = (Boolean) rabbitTemplate.convertSendAndReceive(ConnectivityConstant.APPLICATION_EXCHANGE,
+                ConnectivityConstant.AUTHENTICATION_TOKEN_VALIDATION_ROUTING_KEY,
+                token);
+        log.info("Token {} is valid: {}", token, valid);
+        if (valid == null){
+            throw new AmqpRejectAndDontRequeueException("Failed to validate token");
+        }
+        return valid;
     }
 }
 
