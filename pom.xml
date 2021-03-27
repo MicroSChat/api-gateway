@@ -75,7 +75,7 @@
         <dependency>
             <groupId>com.github.MicroSChat</groupId>
             <artifactId>common-library</artifactId>
-            <version>-d998fc11bc-1</version>
+            <version>-e9c1f820b1-1</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
