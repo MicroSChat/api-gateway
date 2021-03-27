@@ -18,8 +18,11 @@
     </properties>
     <repositories>
         <repository>
-            <id>jitpack.io</id>
-            <url>https://www.jitpack.io</url>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/MicroSChat/*</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
         </repository>
     </repositories>
     <dependencies>
@@ -73,9 +76,9 @@
             <version>2.9.2</version>
         </dependency>
         <dependency>
-            <groupId>com.github.MicroSChat</groupId>
+            <groupId>com.microschat</groupId>
             <artifactId>common-library</artifactId>
-            <version>-e9c1f820b1-1</version>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
